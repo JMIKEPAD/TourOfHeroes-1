@@ -13,7 +13,8 @@ export class HeroDetailComponent implements OnInit {
 
   hero?: Hero;
   isNewHero = false;
-
+submitted=false;
+powers = ['really smart', ' super flexible', 'super hot', 'weather changer'];
   constructor(private route: ActivatedRoute, private heroS: HeroService, private location: Location) { }
 
   ngOnInit(): void {
@@ -22,6 +23,7 @@ export class HeroDetailComponent implements OnInit {
       this.heroS.getHero(heroId).subscribe(data => {
         if (data) {
           this.isNewHero = false;
+          this.submitted = true;
           this.hero = data;
         }
       })
@@ -34,6 +36,12 @@ export class HeroDetailComponent implements OnInit {
   goBack(): void{
     this.location.back()
   }
+
+  onSubmit(){
+    this.submitted = true;
+
+  }
+
 
   save(): void{
     if (this.hero) {
